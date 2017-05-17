@@ -1,0 +1,52 @@
+<p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425"></p-confirmDialog>
+
+<p-dataTable [value]="models" >
+    <p-header ><span class="secondary-text-color">รายการจัดซื้อจัดจ้าง</span>
+       <a (click)="getAddNew()" style="margin-button:5px" class="btn-floating btn-large left waves-effect waves-light blue"><i class="material-icons">add</i></a>
+    </p-header>
+    <p-footer>Choose from the list.</p-footer>
+    <p-column  header="ลำดับ">
+   
+    <ng-template  let-rowIndex="rowIndex" let-col let-car="rowData" pTemplate="body">
+            <span >{{rowIndex+1}}</span>
+        </ng-template>
+    </p-column>
+    <p-column field="dateprocure" header="วันที่">
+      <ng-template let-col let-car="rowData" pTemplate="body">
+            <span >{{car[col.field]}}</span>
+        </ng-template>
+    </p-column>
+    <p-column field="officename" header="ชื่อบริษัท">
+    <ng-template let-col let-car="rowData" pTemplate="body">
+            <span >{{car[col.field]}}</span>
+        </ng-template></p-column>
+    <p-column field="amount" header="จำนวนเงิน"></p-column>
+     
+
+    <p-column styleClass="col-button">
+        <ng-template pTemplate="header">
+            <button type="button" pButton icon="fa-refresh"></button>
+        </ng-template>
+        <ng-template let-myhos="rowData" pTemplate="body">
+         <a class="btn-floating btn-small red" (click)="selectItem(myhos)" >
+      <i class="large material-icons">mode_edit</i>
+    </a>
+            
+        </ng-template>
+    </p-column>
+
+    <p-column styleClass="col-button" [style]="{'width':'60px'}">
+    <ng-template pTemplate="header">
+      ลบ
+    </ng-template>
+    <ng-template let-r="rowData" pTemplate="body">
+   <a class="btn-floating btn-small red"  (click)="confirmDelete(r)"> <i class="material-icons">delete_forever</i></a>
+    
+    </ng-template>
+  </p-column>
+</p-dataTable>
+
+
+<p-dialog header="รายการจัดซื้อจัดจ้าง" [(visible)]="display" modal="modal" width="600" responsive="true">
+ <app-labprocure-add [model1]="model"  (doUpdate)="getUpdate($event)" ></app-labprocure-add>
+</p-dialog>

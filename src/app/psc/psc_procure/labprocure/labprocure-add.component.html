@@ -1,0 +1,51 @@
+<div class="container">
+
+<form>
+<div class="row">
+       <div class="col s3" >   <br>วันที่ </div>
+      <div class="col s9">  
+           <input id="dateprocure" type="date" class="datepicker" name="dateprocure" [ngModel] ="model1?.dateprocure" (ngModelChange)="model1.dateprocure = $event"  >
+           
+       </div>
+     
+      </div>
+
+      <div class="row">
+       
+    <div class="col s3"  >  บริษัท: </div>
+     <div class="col s9"> 
+     <p-dropdown [style]="{'width':'100%'}" (onChange)="doOnChange($event)" name="officeid" [options]="offices" [ngModel] ="model1?.officeid" (ngModelChange)="doChange($event,model1.officename)" >
+
+<ng-template let-car pTemplate="item">
+        <div class="ui-helper-clearfix" style="position: relative;height: 25px;">
+                    <div style="font-size:14px;float:right;margin-top:4px">{{car.label}}</div>
+        </div>
+    </ng-template>
+
+     </p-dropdown>
+        </div>
+      </div>
+
+      <div class="row">
+     
+        <div class="col s3">  <br> จำนวนเงิน:  </div>
+         <div class="col s9"> <input id="amount" type="text" name="amount" [ngModel] ="model1?.amount" (ngModelChange)="model1.amount = $event">
+         </div>
+        </div>
+     
+     <div class ="row">
+
+  
+              
+                <a class="btn-floating btn-small red right" (click)="doCancel()" >
+      <i class="small material-icons">cancel</i>
+    </a>
+               
+                 <a style="margin-right:5px" 
+                  class="btn-floating btn-small blue right" (click)="doSave()" >
+      <i class="small material-icons">check</i>
+    </a>
+            </div>
+  
+</form>
+</div>
