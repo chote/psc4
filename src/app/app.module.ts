@@ -23,4 +23,7 @@ import { ProcureModule } from './psc/psc_procure/procure.module';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+// is is module edit
+
+ }
