@@ -27,16 +27,25 @@ export class LabofficeComponent extends BaseComponent implements OnInit {
        
     
   }   
+  doDelete(r: any) { 
+    let cc: any;
+    let updateId = " officeid=" + r.officeid;
+    console.log(updateId);
+    
+    let st = { tbl: "laboffice", updateId:updateId };
+    this._productService.getDelete(st).subscribe(res => cc = res, err => { }, () => {
+
+      this.models.splice(this.models.indexOf(r), 1);
+     });
+  }
   confirmDelete(r: any) {
      console.log(r);
      
         this.confirmationService.confirm({
             message: 'คุณต้องการลบ Recordนี้ ้?',
             accept: () => {
-                //Actual logic to perform a confirmation
-               // console.log(r);
-             //  console.log( this.mproducts.indexOf(r));
-               this.models.splice(this.models.indexOf(r), 1);
+              this.doDelete(r);        
+        
             },
             reject:()=>{
 
@@ -53,27 +62,73 @@ export class LabofficeComponent extends BaseComponent implements OnInit {
     this.display = false;
     if (event.isSave) {
       let cmodel = event.model;
-      if (event.model.hasOwnProperty("labid")) {
-        cmodel['updateId'] = "labid=" + cmodel.labid;
+      if (event.model.hasOwnProperty("officeid")) {
+        cmodel['updateId'] = "officeid=" + cmodel.officeid;
       }
+
       let cc: any;
-      this._productService.getAdd(cmodel, 'laboffice').subscribe(res => cc = res, err => {
-        console.log('err'), () => {
-             
+this._productService.getAdd(cmodel, 'laboffice').subscribe(res => cc = res, err => {
+  console.log('err');
+      }, () => {
           console.log("good");
-        };
-      })
+          this.getModels("desc");
+      });
     }
   }
-  ngOnInit() {
+  cats: any[];
+  getCats(ind:string) { 
+let sql: any;
+sql = { sql: "select * from categories" };
+    //console.log(sql);
+    
+    this._productService.getSql(sql).subscribe(resproducts => this.cats = resproducts, err => { console.log(err); }, () => {
+   //   console.log(this.models);
 
-    let sql: any;
-
-    //  sql = { tbl: "hospital",con:"1=1 and pvcode ='36' and hostypename in('โรงพยาบาลชุมชน','โรงพยาบาลศูนย์','โรงพยาบาลทั่วไป') " }; console.log(sql);
-    sql = { sql: "select * from laboffice " };
+    });
+  }
+  getModels(ind:string) { 
+let sql: any;
+sql = { sql: "select * from laboffice order by officeid " + ind };
+    //console.log(sql);
+    
     this._productService.getSql(sql).subscribe(resproducts => this.models = resproducts, err => { console.log(err); }, () => {
-      console.log(this.models);
+   //   console.log(this.models);
 
+    });
+  }
+  ngOnInit() {
+    this.getModels("desc");
+    this.getSuppliers("desc");this.getCats("desc");
+  }
+ getRandomColor() {
+   var letters = '0123456789ABCDEF'.split('');
+   var color = '#';
+   for (var i = 0; i < 6; i++ ) {
+       color += letters[Math.floor(Math.random() * 16)];
+   }
+   return color;
+}
+  suppliers: any[];
+  tiles=[];
+   
+ getSuppliers(ind:string) { 
+let sql: any;
+sql = { sql: "select * from supplier " };
+    //console.log(sql);
+let obj: any;
+    this._productService.getSql(sql).subscribe(resproducts => this.suppliers = resproducts, err => { console.log(err); }, () => {
+   //   console.log(this.models);;
+      let color = ['#e4fefb', '#fee4e7	', '#e7fee4	', '#e4e7fe','#feff9b'];
+ 
+  for (var i = 0; i < this.suppliers.length; i++) {
+
+        obj = { text: this.suppliers[i]['supname'], cols: Math.floor(Math.random() * 3) + 1  , rows: Math.floor(Math.random() * 3) + 1  , color:color[Math.floor(Math.random() * 5) ] }
+     
+      this.tiles.push(obj);
+   
+    
+  }
+     console.log( this.tiles);  
     });
   }
 

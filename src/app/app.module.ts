@@ -18,8 +18,8 @@ import { ProcureModule } from './psc/psc_procure/procure.module';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    AppRoutingModule,PscShareModule.forRoot(),
-    ProcureModule
+    AppRoutingModule, PscShareModule.forRoot(),
+       ProcureModule
   ],
   bootstrap: [AppComponent]
 })

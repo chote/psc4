@@ -1,0 +1,31 @@
+<ul >
+      <li class="tab col s3"><a href="#test1"></a></li>
+ 
+    </ul>
+<md-tab-group width="100%" align="center">
+  <md-tab label="หมวดหมู่วัสดุ">
+  
+    <div  style="margin-top:20px;">
+      <div class="row"  style="margin-left:20px;margin-right:20px" >
+        <div class="col s2 m2 l2" style="margin-top:20px" *ngFor="let cat of cats">
+          <md-card class="example-card" style="background-color:#ecf0f1;cursor: pointer; cursor: hand;" (click)="doSelectFilter(cat,'cat')">
+           <md-card-content >
+               <img md-card-image src="assets/{{cat.catname}}.png">
+                 </md-card-content >
+            <md-card-footer >
+           {{cat.shortname}}
+            </md-card-footer>
+          </md-card>
+        </div>
+
+      </div>
+    </div>
+  </md-tab>
+  <md-tab label="บริษัท">
+    <md-grid-list style="margin-top:10px;" gutter="5em" cols="9" md-gutter-gt-md="16px" md-gutter-gt-sm="8px" md-gutter="4px" rowHeight="2:1">
+      <md-grid-tile *ngFor="let tile of tiles" [rowspan]="tile.rows" [style.background]="tile.color" style="cursor: pointer; cursor: hand;" (click)="doSelectFilter(tile,'supplier')">
+        {{tile.text}}
+      </md-grid-tile>
+    </md-grid-list>
+  </md-tab>
+</md-tab-group>

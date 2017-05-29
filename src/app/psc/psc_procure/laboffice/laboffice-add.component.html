@@ -1,3 +1,29 @@
-<p>
-  laboffice-add works!
-</p>
+<div class="container">
+
+<form>
+
+
+
+      <div class="row">
+     
+        <div class="col s3">  <br>  บริษัท:  </div>
+         <div class="col s9"> <input id="officename" type="text" name="officename" [ngModel] ="model1?.officename" (ngModelChange)="model1.officename = $event">
+         </div>
+        </div>
+     
+     <div class ="row">
+
+  
+              
+                <a class="btn-floating btn-small red right" (click)="doCancel()" >
+      <i class="small material-icons">cancel</i>
+    </a>
+               
+                 <a style="margin-right:5px" 
+                  class="btn-floating btn-small blue right" (click)="doSave()" >
+      <i class="small material-icons">check</i>
+    </a>
+            </div>
+  
+</form>
+</div>

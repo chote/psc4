@@ -8,14 +8,12 @@ import { LabofficeComponent } from './laboffice/laboffice.component';
 import { ProcureComponent } from './procure.component';
 import { LabprocureAddComponent } from './labprocure/labprocure-add.component';
 import { LabofficeAddComponent } from './laboffice/laboffice-add.component';
-import { ShowproductComponent } from './showproduct/showproduct.component';
-import { ProductfilterComponent } from './productfilter/productfilter.component';
-import { ProductDashboardComponent } from './product-dashboard/product-dashboard.component';
+import { PscProcureComponent } from './../psc-procure/psc-procure.component';
 
 @NgModule({
   imports: [
     CommonModule, ProcureRoutingModule, PscShareModule
   ],
-  declarations: [ LabofficeComponent, LabprocureComponent, ProcureComponent, LabprocureAddComponent, LabofficeAddComponent, ShowproductComponent, ProductfilterComponent, ProductDashboardComponent]
+  declarations: [ LabofficeComponent, LabprocureComponent, ProcureComponent, LabprocureAddComponent, LabofficeAddComponent, PscProcureComponent]
 })
 export class ProcureModule { }

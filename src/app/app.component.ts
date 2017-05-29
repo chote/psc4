@@ -13,6 +13,7 @@ export class AppComponent {
      constructor( public userService: UserService) {
     
      this.user = userService.userName;
+     
      }
     onClick() {
         this.message = 'Hello ' + this.name;
