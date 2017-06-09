@@ -1,14 +1,36 @@
-
- <div class="input-field col s6">
-          <i class="material-icons prefix">search</i>
-          <input  type="text" pInputText size="50" [ngModel]="txtSearch" (keyup)="doSearch($event.target.value)" >
-        
+<div style="margin:20px"> <a class="waves-effect  waves-light btn btn1"  [class.activeChild]="selectedChip == txtSearch"   >ddd</a>
+  <input type="text" name="txtSearch" [(ngModel)]="txtSearch">
+<div class="row">
+  <div class="col">
+   <a class="waves-effect  waves-light btn btn1"  *ngFor="let a0 of y0" [class.activeButton]="a0 == selectedChip" (click)="doSetMaster(a0)" >
+ {{a0}}
+    </a>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <div class="chip activechip"  *ngFor="let a1 of y1"  [class.activeChild]="setColor(a1,1)"  (click)="doSetFilter(a1)"  >
+    {{a1}}
+    </div> 
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <div class="chip activechip" *ngFor="let a2 of y2"   [class.activeChild]="setColor(a2,2)"  (click)="doSetFilter(a2)"  >
+    {{a2}}
         </div>
-<p-panel  [toggleable]="true" >
-  <p-header><i class="material-icons">filter_list</i></p-header>
-  <app-productfilter (sendFilter)="getChildFilter($event)">  </app-productfilter>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+   <span class=" badge"  style="font-size:0.6em;margin-bottom:5px;border-radius: 10px;color:black" *ngFor="let a3 of y3" (click)="doSetFilter(a3)"   [class.activeChild]="setColor(a3,3)" >
+    {{a3}}
+    </span>
+  </div>
+</div>
 
-</p-panel>
+
+<hr>
 <p-dataTable *ngIf="isShowData" [value]="models" [rows]="10" [paginator]="true" [globalFilter]="gb" #dt>
   <p-header><span class="secondary-text-color">รายการวัสดุทันตกรรม</span>
     <a (click)="getAddNew()" style="margin-bottom:5px" class="btn-floating btn-large left waves-effect waves-light blue"><i class="material-icons">add</i></a>
@@ -55,6 +77,4 @@
     </ng-template>
   </p-column>
 </p-dataTable>
-
-
-
+</div>

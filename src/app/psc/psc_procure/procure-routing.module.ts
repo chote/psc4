@@ -9,6 +9,8 @@ import { LabprocureAddComponent } from './labprocure/labprocure-add.component';
 import { ShowproductComponent } from './showproduct/showproduct.component';
 import { ProductfilterComponent } from './productfilter/productfilter.component';
 import { ProductDashboardComponent } from './product-dashboard/product-dashboard.component';
+import { ProductReportComponent } from './product-report/product-report.component';
+import { ShowbursComponent } from './showburs/showburs.component';
 const routes: Routes = [
  
   {
@@ -21,7 +23,8 @@ const routes: Routes = [
       { path: 'showproduct', component: ShowproductComponent },
       { path: 'productfilter', component: ProductfilterComponent },
      { path: 'productdashboard', component: ProductDashboardComponent },
-     
+     { path: 'productreport', component: ProductReportComponent },
+       { path: 'showburs', component:  ShowbursComponent},
        { path: '', component: LabprocureComponent }
     ]
   },

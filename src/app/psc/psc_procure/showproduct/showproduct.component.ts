@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from "../../../../app/psc/psc_shared/psc_base.component";
+import * as _ from 'lodash';
 @Component({
   selector: 'app-showproduct',
   templateUrl: './showproduct.component.html',
@@ -7,7 +8,7 @@ import { BaseComponent } from "../../../../app/psc/psc_shared/psc_base.component
 })
 export class ShowproductComponent extends BaseComponent implements OnInit {
 
-
+  isShowData = false;
   cats: any[];
   getCats(ind:string) { 
 let sql: any;
@@ -18,6 +19,23 @@ sql = { sql: "select * from categories" };
    //   console.log(this.models);
 
     });
+  }
+  txtSearch = "";
+  doSearch(e: string) { 
+    this.txtSearch = e;
+      this.isShowData = true;
+    //console.log(this.txtSearch);
+    if (e.length == 1) {
+      this.getModels({ sql: "select * from mainproduct " });
+      console.log(this.models);
+    
+    } else { 
+   this.models=   _.filter(this.models, function(o) { 
+        let x:string = o.mname;
+        return x.indexOf(e) !== -1;
+      //  return !o.active;
+      });
+    }
   }
   getModels(sql:any) { 
 
@@ -36,8 +54,7 @@ sql = { sql: "select * from categories" };
   getChildFilter(c: any) {
     let con = "";
     let sql: any;
-    console.log(c);
-    
+    this.isShowData = true;   
     if (c.filterName == "cat") {
       con = " catid = " + c.catid;
       sql = { sql: "select * from mainproduct where " + con };
@@ -45,7 +62,7 @@ sql = { sql: "select * from categories" };
     if (c.filterName == "supplier") {
        sql = { sql: "select * from mainproduct m ,mainstockin i where m.mid = i.mid and i.supid= " + c.supid };
      }
-    console.log(sql);
+   // console.log(sql);
     
     this.getModels(sql);
    }

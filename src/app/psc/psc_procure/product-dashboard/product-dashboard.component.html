@@ -1,11 +1,39 @@
-<p>
-  product-dashboard works!
-</p>
-<div class="container">
-<md-grid-list cols="3" rowHeight="2:1">
-  <md-grid-tile colspan="2" rowspan="1" ><chart [options]="options"></chart></md-grid-tile>
-  <md-grid-tile  colspan="1" rowspan="1" ><chart [options]="options"></chart></md-grid-tile>
-  <md-grid-tile  colspan="1" rowspan="2" ><chart [options]="options"></chart></md-grid-tile>
-  <md-grid-tile  colspan="2" rowspan="1" ><chart [options]="options"></chart></md-grid-tile>
+
+  <div class="row" style="margin:10px" >
+    <div  class="col s4 ">
+
+     
+<md-card>
+ <md-card-content>
+  <p-chart type="bar" height="400px" [data]="data"></p-chart>
+ </md-card-content>
+ <md-card-footer style="background-color:bisque" >
+   Card footer
+ </md-card-footer>
+</md-card>
+    </div>
+    <div class="col s4">
+   <app-product-report></app-product-report>
+
+    </div>
+     <div class="col s4">
+<p-chart type="bar"  height="400px" [data]="data"></p-chart>
+    </div>
+  <div class="col s4">   <chart [options]="options"></chart></div>
+  </div>
+
+<md-grid-list cols="3" gutterSize="10em" rowheight="fit">
+  <md-grid-tile>
+    <md-card>
+ <md-card-content>
+  <p-chart type="bar" height="400px" [data]="data"></p-chart>
+ </md-card-content>
+ <md-card-footer style="background-color:bisque" >
+   Card footer
+ </md-card-footer>
+</md-card>
+  </md-grid-tile>
+   <md-grid-tile><p-chart type="bar"  height="400px" [data]="data"></p-chart></md-grid-tile>
 </md-grid-list>
-</div> 
+
+    

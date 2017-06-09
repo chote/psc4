@@ -7,7 +7,7 @@
   
     <div  style="margin-top:20px;">
       <div class="row"  style="margin-left:20px;margin-right:20px" >
-        <div class="col s2 m2 l2" style="margin-top:20px" *ngFor="let cat of cats">
+        <div class="col s1 m1 l1" style="margin-top:20px" *ngFor="let cat of cats">
           <md-card class="example-card" style="background-color:#ecf0f1;cursor: pointer; cursor: hand;" (click)="doSelectFilter(cat,'cat')">
            <md-card-content >
                <img md-card-image src="assets/{{cat.catname}}.png">
