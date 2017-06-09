@@ -1,9 +1,20 @@
 <div style="margin:20px"> 
-  
+   <nav>
+    <div class="nav-wrapper" style="background-color:#40C4FF" >
+      <a href="#!" class="brand-logo" style="margin-left:20px" >{{catname}}</a>
+      <ul class="right hide-on-med-and-down">
+       
+        <li *ngFor="let c of cats" style="margin-left:-15px;" >
+          <a  title="{{c.catname}}" class="btn-floating btn-small waves-effect waves-light red"><img src="assets/{{c.catname}}_1.png" (click)="doFilterCat(c)"></a>
+        </li>
+        
+      </ul>
+    </div>
+  </nav>
   <input type="text" name="txtSearch" [(ngModel)]="txtSearch">
 <div class="row">
   <div class="col">
-   <a class="waves-effect  waves-light btn btn1"  *ngFor="let a0 of y0" [class.activeButton]="a0 == selectedChip" (click)="doSetMaster(a0)" >
+   <a class="waves-effect  waves-light btn btn1" style="margin-bottom:5px;"  *ngFor="let a0 of y0" [class.activeButton]="a0 == selectedChip" (click)="doSetMaster(a0)" >
  {{a0}}
     </a>
   </div>
@@ -24,7 +35,7 @@
 </div>
 <div class="row">
   <div class="col">
-   <span class=" badge"  style="font-size:0.6em;margin-bottom:5px;border-radius: 10px;color:black" *ngFor="let a3 of y3" (click)="doSetFilter(a3)"   [class.activeChild]="setColor(a3,3)" >
+   <span class=" badge"  style="font-size:0.6em;margin-bottom:5px;border-radius: 10px;color:black" *ngFor="let a3 of y3" (click)="doSetFilter(a3)"   [class.activeLeaf]="setColor(a3,3)" >
     {{a3}}
     </span>
   </div>
@@ -34,8 +45,7 @@
 <hr>
 <p-dataTable *ngIf="isShowData" [value]="models" [rows]="10" [paginator]="true" [globalFilter]="gb" #dt>
   <p-header><span class="secondary-text-color">รายการวัสดุทันตกรรม</span>
-    <a (click)="getAddNew()" style="margin-bottom:5px" class="btn-floating btn-large left waves-effect waves-light blue"><i class="material-icons">add</i></a>
-  </p-header>
+    </p-header>
   <p-footer>Choose from the list.</p-footer>
   <p-column  header="ลำดับ">
 
@@ -58,7 +68,7 @@
 
   <p-column styleClass="col-button">
     <ng-template pTemplate="header">
-      <button type="button" pButton icon="fa-refresh"></button>
+     
     </ng-template>
     <ng-template let-myhos="rowData" pTemplate="body">
       <a class="btn-floating btn-small blue" >

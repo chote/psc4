@@ -10,11 +10,7 @@ import { Observable } from 'rxjs/Observable';
 export class ShowbursComponent extends BaseComponent implements OnInit {
 
   getModels(sql: any) {
-
-    //console.log(sql);
-
-    this._productService.getSql(sql).subscribe(resproducts => this.models = resproducts, err => { console.log(err); }, () => {
-
+   this._productService.getSql(sql).subscribe(resproducts => this.models = resproducts, err => { console.log(err); }, () => {
     });
   }
   isShowData = false;
@@ -23,6 +19,7 @@ export class ShowbursComponent extends BaseComponent implements OnInit {
   t1 = "";
   t2 = "";
   t3 = "";
+  catid = 1;
   updateText(t: string) {
     if (this.txtSearch.indexOf('t') == -1) {
       this.txtSearch = this.t0 + " " + this.t1 + " " + this.t2 + " " + this.t3;
@@ -86,34 +83,61 @@ export class ShowbursComponent extends BaseComponent implements OnInit {
     if (sh) { return true; } else { return false; }
   }
   model1: any[];
+  setup() {
+    let catid = this.catid;
+    this.y0 = [];
+    this.y1 = [];
+    this.y2 = [];
+    this.y3 = [];
+    this.yn = [];
+     this.selectedChip = "Airoter"
+   // this.arrburs = [];
+    this.burs = _.filter(this.model1, function (o) {
+      if (o['catid'] == catid) { return o; }
+    });
+
+    this.burs.forEach(v => {
+      let xx: any[] = v.mname.split(/[\s-]+/);
+      //  xx = ['Air','prep','taper','008'];
+      this.arrburs.push(xx);
+      //console.log(this.arrburs);
+      for (let i = 0; i < 4; i++) {
+        if (xx[i] && i == 0 && this.y0.indexOf(xx[i]) == -1) { this.y0.push(xx[i]); }
+        if (xx[i] && i == 1 && this.y1.indexOf(xx[i]) == -1) { this.y1.push(xx[i]); }
+        if (xx[i] && i == 2 && this.y2.indexOf(xx[i]) == -1) { this.y2.push(xx[i]); }
+        if (xx[i] && i == 3 && this.yn.indexOf(xx[i]) == -1) { this.yn.push(xx[i]); }
+      }
+    });
+    this.yn.forEach(v => {
+      // console.log(v);
+      if (v && this.y2.indexOf(v) == -1 && v) { this.y3.push(v); }
+    });
+    this.y3 = this.y3.sort();
+
+  }
+  catname = "";
+  doFilterCat(cat:any) {
+    this.catname = cat.catname;
+     this.isShowData = false;
+    this.selectedChip = "";
+    this.txtSearch = "";
+    this.doSetFilter("");
+    this.catid = cat.catid;
+     console.log(cat.catid);
+    this.setup();
+  }
+  cats = [];
   ngOnInit() {
 
     let sql = { sql: "select * from mainproduct " };
-    this._productService.getSql(sql).subscribe(resproducts => this.models = resproducts, err => { console.log(err); }, () => { 
-    this.model1 = _.clone(this.models);
-    this.burs = _.filter(this.model1, function (o) { 
-      if (o['catid'] == 1) { return o;}  
-    });
+    this._productService.getSql(sql).subscribe(resproducts => this.models = resproducts, err => { console.log(err); }, () => {
+      this.model1 = _.clone(this.models);
+      sql = { sql: "select * from categories  " };
+      this._productService.getSql(sql).subscribe(resproducts => this.cats = resproducts, err => { console.log(err); }, () => { });
 
-      this.burs.forEach(v => {
-        let xx: any[] = v.mname.split(/[\s-]+/);
-      //  xx = ['Air','prep','taper','008'];
-        this.arrburs.push(xx);
-        //console.log(this.arrburs);
-        for (let i = 0; i < 4; i++) {
-          if (xx[i] && i == 0 && this.y0.indexOf(xx[i]) == -1 ) { this.y0.push(xx[i]); }
-          if (xx[i] && i == 1 && this.y1.indexOf(xx[i]) == -1) { this.y1.push(xx[i]); }
-          if (xx[i] && i == 2 && this.y2.indexOf(xx[i]) == -1 ) { this.y2.push(xx[i]); }
-          if (xx[i] && i == 3 && this.yn.indexOf(xx[i]) == -1) { this.yn.push(xx[i]); }
-        }
-      });
-      this.yn.forEach(v => {
-       // console.log(v);
-        if (v && this.y2.indexOf(v) == -1 && v) { this.y3.push(v); }
-      });
-     
-      
-});
+      this.setup();
+
+    });
     // console.log(this.y0);
     //console.log(this.y1);
     //   console.log(this.y2);console.log(this.y3);
